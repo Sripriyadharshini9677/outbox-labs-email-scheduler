@@ -1,0 +1,2 @@
+import { Router } from 'express'; import multer from 'multer'; import { auth } from '../middleware/auth.js'; import { schedule,list,cancel } from '../controllers/emailController.js';
+const upload=multer({storage:multer.memoryStorage(),limits:{fileSize:2*1024*1024}}); export const emailRouter=Router(); emailRouter.use(auth); emailRouter.post('/',upload.single('csv'),schedule); emailRouter.get('/',list); emailRouter.delete('/:id',cancel);
